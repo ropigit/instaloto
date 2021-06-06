@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>LOTERIA Y NUMEROS ALEATORIOS</title>
+  <meta name="viwport" content="with=divice-width, initial-scale=1" />
+	<!-- BOOTSTRAP 4 BOOTSWATCH LUX THEME -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+
+	
+<style>
+
+
+ table,td { 
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.bor{
+ border: 1px solid blue;  
+ border-radius: 10px;
+ padding-top: 5px;
+ margin-bottom: 0px;
+}
+
+.bor2{
+ border-top: 1px solid blue; 
+ border-right: 1px solid blue;
+ border-left: 1px solid blue;  
+ border-radius: 10px;
+ padding-top: 5px;
+ margin-bottom: 0px;
+}
+
+input.c{
+  
+  text-align: center;
+  
+  width: 100px;
+  height: 40px;
+
+}
+
+span.a{
+  display: inline-block;
+  text-align: center;
+  width: 90px;
+  height: 40px;
+  background: lightgray;
+}
+
+p.a{
+ 
+  text-align: center;
+  width: 150px;
+  height: 40px;
+  
+}
+
+p.b {
+  margin-left: 400px;
+}
+p.c {
+	text-align: center;
+	font-weight: bold;
+	color: black;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  background: silver;
+
+}
+p.d {
+  text-align: center;
+  width: 150px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  background: red;
+ 
+
+}
+
+p.e {
+  text-align: center;
+}
+div.a {
+  border: 1px solid;
+  
+}
+
+div.b {
+  display: inline-block;
+  padding-top: 10px;
+  text-align: center;
+  align-items: center;
+  border: 1px solid;
+  width: 880px;
+  height: 80px;
+
+}
+div.c{
+border: .3em solid;
+border-radius: 10px;
+display: inline-block;
+
+
+
+text-align: center;
+
+
+}
+
+
+button.a {
+ width: 100px;
+ border-radius: 10px;
+ text-align: center;
+
+}
+
+.wrapper {
+  .make-row;
+}
+
+.botones{
+	height: 50px;
+	width: 70px;
+	border: 3px solid;
+	border-color: #cfeccf;
+	border-radius: 10px;
+}
+
+.fondo1{
+	background-color: #d0e6ea;
+  margin-left: 250px;
+  margin-right: 149px;
+  text-align: center;
+  width: 800px;
+
+}
+.verde{
+	
+    color:green;
+    font-weight: bold;
+    background: #4bbf73;  
+	
+	
+}
+
+.centrar{
+  text-align: center;
+}
+
+
+.right{
+margin-left: 2px;
+  display:inline;
+  clear:both;
+}
+.left{
+  text-align: center;
+  float:left;
+  border:10px solid #b3d7ff;
+  padding: 10px;
+
+}
+
+</style>
+
+
+<script>
+let repetido = 0
+let conteo = 0
+let sort = 0
+let contador=0
+let boton
+let b=0
+let i=0
+let nombre=""
+let participantes =[]
+let num =0
+let min=0
+let max =0
+let ganador =""
+let premio =0
+let cuota =0
+let sorteo = ""
+let fecha =""
+
+function sorteo1(){
+
+	participantes = JSON.parse(localStorage.getItem("participantes"));
+  //const min = document.getElementById("minimo").value;
+  //const max = document.getElementById("maximo").value;
+   max = participantes.length
+
+  sort = Math.floor(Math.random()*Math.floor(max))
+ 
+//if (document.getElementById("n"+sort).className=== "btn btn-danger"){
+//	repetido = 1
+//	console.log("repetido1"+repetido+"conteo"+conteo)
+//	sorteo()
+//}
+
+  while(sort<min){
+
+    sort = Math.floor(Math.random()*Math.floor(max));
+
+
+    let pa = document.createElement("P");
+ 	pa.innerHTML = sort;
+  	document.getElementById("elegidos").appendChild(pa);
+
+   
+  }
+  ganador = participantes[sort].nombre
+  numganador =participantes[sort].num
+
+  document.getElementById("resultado").innerHTML="el ganador es: "+ganador+" con el n°: "+numganador
+  //document.getElementById("n"+sort).innerHTML= sort
+  //document.getElementById("n"+sort).className= "btn btn-danger"
+   conteo+= 1
+
+  console.log("repetido2="+repetido+"conteo2="+conteo)
+ }
+
+
+//-----------------------------------------------
+
+function bt2() {
+
+participantes = JSON.parse(localStorage.getItem("participantes"));	
+   
+   max = participantes.length
+   cuota = document.getElementById("cuota").value
+   premio = (max * cuota)/2
+   console.log("premio="+premio)
+   document.getElementById("premio").innerHTML= "c"+premio
+
+let divprincipal =document.getElementById("botones")
+
+for (b=1;b<11;b++){
+let div = 	document.createElement("div")
+
+for (i=0;i<10;i++){
+	
+ boton = document.createElement("button");
+
+ 
+ 
+ div.id ="divboton"+b
+ boton.innerHTML= contador;
+ boton.id = "n"+contador
+ boton.className ="btn btn-success botones"
+ boton.type="button"
+ //boton.setAttribute("style","width:70px;height:40px")
+
+  
+
+div.appendChild(boton);
+divprincipal.appendChild(div)
+
+for (let indice in participantes) {
+	const dato = participantes[indice] 
+
+	console.log(dato.num)
+
+if (dato.num == contador) {
+	boton.style.backgroundColor = "blue"
+	console.log("numero="+contador)
+}
+
+}
+
+document.getElementById("n"+contador).addEventListener("click",mostrar )
+contador+=1
+
+}// for interno
+}// for externo
+
+}// cierre de funcion bt2() --------------------------------
+
+// areglo --------------------------
+
+
+// funcion mostrar--------------------------------------
+function mostrar(){
+
+
+if (this.style.backgroundColor === "blue"){
+	alert("Numero ya escogido!!")
+} else {
+  fecha = new Date()
+  sorteo = document.getElementById("n_sorteo").innerHTML 
+	nombre = prompt("Digite su nombre y apellidos:")
+  if (nombre === null || nombre === "") {
+        return; //break out of the function early
+    }
+    num= this.innerHTML
+	this.style.backgroundColor = "blue"
+	alert("Hola " + nombre +" usted escogio el N°:"+num)
+almacena()
+}
+}
+//--------------------------------------------------------------
+function almacena() {
+
+const participante ={
+	sorteo,
+  nombre,
+	num, fecha
+}
+
+console.log(participante)
+
+if (localStorage.getItem("participantes")===null){
+alert("es nulo")
+participantes = [];
+participantes.push(participante);
+localStorage.setItem("participantes",JSON.stringify(participantes));
+} else {
+participantes = JSON.parse(localStorage.getItem("participantes"));
+participantes.push(participante);
+localStorage.setItem("participantes",JSON.stringify(participantes));
+
+}// cierra else
+
+
+} // cierra funcion almacena
+
+</script>
+
+</head>
+
+<body>
+
+<div class="a"> 
+<p id="n_sorteo" class="c"> SORTEO N° 001</p>
+</div>
+
+<aside class = "left">
+
+
+
+  <p class="bor verde a"> ( EN VERDE) </p>
+  <p> Números libres </p>
+
+ <div>
+   <button input type="button" onclick="bt2()" class="a btn btn-outline-info">  tabla </button>
+ </div>
+
+ <div>
+   <button input type="button" onclick="sorteo1()" id="sorteo" class="a btn btn-outline-secondary">Sorteo</button>
+ </div>
+
+</aside>
+
+<section class = "right">
+  <div class="b">
+   <p class="bor2 a b " id="premio"> PREMIO </p>
+   <p class="b d">premio</p>
+  </div>
+<!--<p>Valor minimo <input type="number" name="minimo" id="minimo"></p>
+<p>Valor maximo <input type="number" name="maximo" id="maximo"></p>
+-->
+
+
+  <div class="c">
+    <input type="text" name="cuota" id="cuota" class="c" placeholder="cuota">
+    <div class="d">
+      <p class="c"> Cuota </p>
+      
+    </div>
+  </div>
+
+ 
+
+<div>
+ <div id="elegidos"></div>
+ <h1 id="resultado"></h1>
+ <div id="botones"  class="fondo1" ></div>
+
+</div>
+
+
+ </section>
+
+
+</body>
+
+
+</html>

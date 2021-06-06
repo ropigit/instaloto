@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- BOOTSTRAP 4 BOOTSWATCH LUX THEME -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+	<title>participantes</title>
+
+<script>
+datos =""
+nombre=""
+num =0
+function esto(){
+	datos = JSON.parse(localStorage.getItem("participantes"))
+	
+	let cant = datos.length
+
+document.getElementById("nombre").innerHTML =""
+	for(i=0;i<cant;i++){
+ let dato_num = datos[i].num
+
+
+	document.getElementById("nombre").innerHTML += datos[i].sorteo + " nombre: "+datos[i].nombre+"  numero: "+datos[i].num+" <a class='btn btn-danger' onclick='deleteTask("+dato_num+")'>borrar</a><br>"
+		}
+}
+
+function deleteTask(title) {
+  console.log(title)
+  datos = JSON.parse(localStorage.getItem("participantes"))
+  for(let i = 0; i < datos.length; i++) {
+    if(datos[i].num == title) {
+      datos.splice(i, 1);
+    }
+  }
+}
+</script>	
+</head>
+
+<body>
+	<div class="card">
+		 <div class="card-body">
+		  <p id="nombre" >	<br></p>
+		  <button type="button" onclick="esto()">listado</button>
+	     </div>
+
+	</div>
+</body>
+
+</html>
