@@ -228,13 +228,7 @@ function sorteo1(){
 //-----------------------------------------------
 
 function bt2() {
-
-participantes = JSON.parse(localStorage.getItem("participantes"));	
-   if (localStorage.getItem("participantes")===null){
-alert("bt2 es nulo")
-return;
-}
-   max = participantes.length
+  
    cuota = document.getElementById("cuota").value
    premio = (max * cuota)/2
    console.log("premio="+premio)
@@ -243,38 +237,44 @@ return;
 let divprincipal =document.getElementById("botones")
 
 for (b=1;b<11;b++){
-let div = 	document.createElement("div")
+  let div = 	document.createElement("div")
 
-for (i=0;i<10;i++){
+  for (i=0;i<10;i++){
 	
- boton = document.createElement("button");
-
+   boton = document.createElement("button");
  
- 
- div.id ="divboton"+b
- boton.innerHTML= contador;
- boton.id = "n"+contador
- boton.className ="btn btn-success botones"
- boton.type="button"
- //boton.setAttribute("style","width:70px;height:40px")
+   div.id ="divboton"+b
+   boton.innerHTML= contador;
+   boton.id = "n"+contador
+   boton.className ="btn btn-success botones"
+   boton.type="button"
+   //boton.setAttribute("style","width:70px;height:40px")
 
-  
+   div.appendChild(boton);
+   divprincipal.appendChild(div)
 
-div.appendChild(boton);
-divprincipal.appendChild(div)
-
-for (let indice in participantes) {
+	
+if (localStorage.getItem("participantes")===null){
+alert("bt2 es nulo")
+} else{	
+	
+    participantes = JSON.parse(localStorage.getItem("participantes"));	
+    max = participantes.length
+    for (let indice in participantes) {
 	const dato = participantes[indice] 
 
 	console.log(dato.num)
 
-if (dato.num == contador) {
+    if (dato.num == contador) {
 	boton.style.backgroundColor = "blue"
 	console.log("numero="+contador)
 }
 
 }
 
+}	
+	
+	
 document.getElementById("n"+contador).addEventListener("click",mostrar )
 contador+=1
 
