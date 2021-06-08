@@ -230,10 +230,7 @@ function sorteo1(){
 function bt2() {
   
    cuota = document.getElementById("cuota").value
-   premio = (max * cuota)/2
-   console.log("premio="+premio)
-   document.getElementById("premio").innerHTML= "c"+premio
-
+   
 let divprincipal =document.getElementById("botones")
 
 for (b=1;b<11;b++){
@@ -260,6 +257,11 @@ alert("bt2 es nulo"+ contador)
 	
     participantes = JSON.parse(localStorage.getItem("participantes"));	
     max = participantes.length
+	
+    premio = (max * cuota)/2
+   console.log("premio="+premio)
+   document.getElementById("premio").innerHTML= "c"+premio
+	
     for (let indice in participantes) {
 	const dato = participantes[indice] 
 
