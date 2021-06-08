@@ -232,6 +232,10 @@ function bt2() {
    cuota = document.getElementById("cuota").value
    
 let divprincipal =document.getElementById("botones")
+if (localStorage.getItem("participantes")===null){
+alert("bt2 es nulo"+ contador)
+} else {
+
 
 for (b=1;b<11;b++){
   let div = 	document.createElement("div")
@@ -251,9 +255,7 @@ for (b=1;b<11;b++){
    divprincipal.appendChild(div)
 
 	
-if (localStorage.getItem("participantes")===null){
-alert("bt2 es nulo"+ contador)
-} else {	
+	
 	
     participantes = JSON.parse(localStorage.getItem("participantes"));	
     max = participantes.length
@@ -274,7 +276,7 @@ alert("bt2 es nulo"+ contador)
 
 }
 
-}	
+	
 	
 	
 document.getElementById("n"+contador).addEventListener("click",mostrar )
@@ -282,7 +284,7 @@ contador+=1
 
 }// for interno
 }// for externo
-
+}// cierre del else
 }// cierre de funcion bt2() --------------------------------
 
 // areglo --------------------------
