@@ -232,9 +232,7 @@ function bt2() {
 participantes = JSON.parse(localStorage.getItem("participantes"));	
    if (localStorage.getItem("participantes")===null){
 alert("bt2 es nulo")
-participantes = [];
-participantes.push(participante);
-localStorage.setItem("participantes",JSON.stringify(participantes));
+return;
 }
    max = participantes.length
    cuota = document.getElementById("cuota").value
@@ -316,10 +314,9 @@ const participante ={
 	num, fecha
 }
 
-console.log(participante)
 
 if (localStorage.getItem("participantes")===null){
-alert("es nulo")
+alert("funcion almacena es nulo")
 participantes = [];
 participantes.push(participante);
 localStorage.setItem("participantes",JSON.stringify(participantes));
