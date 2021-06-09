@@ -229,7 +229,58 @@ function sorteo1(){
 
 function bt2() {
 
-participantes = JSON.parse(localStorage.getItem("participantes"));	
+if (localStorage.getItem("participantes")!==null){  
+   mostrar_premio()
+   
+ }  
+
+let divprincipal =document.getElementById("botones")
+
+for (b=1;b<11;b++){
+   let div = 	document.createElement("div")
+
+     for (i=0;i<10;i++){
+	
+        boton = document.createElement("button");
+
+ 
+        div.id ="divboton"+b
+        boton.innerHTML= contador;
+        boton.id = "n"+contador
+        boton.className ="btn btn-success botones"
+        boton.type="button"
+                             //boton.setAttribute("style","width:70px;height:40px")
+
+        div.appendChild(boton);
+        divprincipal.appendChild(div)
+
+        if (localStorage.getItem("participantes")!==null){
+          
+          for (let indice in participantes) {
+	           const dato = participantes[indice] 
+
+	           console.log(dato.num)
+
+           if (dato.num == contador) {
+	           boton.style.backgroundColor = "blue"
+	           console.log("numero="+contador)
+           }
+
+          }
+        } 
+
+        document.getElementById("n"+contador).addEventListener("click",mostrar )
+        contador+=1
+
+      }// for interno
+}// for externo
+
+}// cierre de funcion bt2() --------------------------------
+
+// areglo --------------------------
+
+function mostrar_premio () {
+   participantes = JSON.parse(localStorage.getItem("participantes"));  
    
    max = participantes.length
    cuota = document.getElementById("cuota").value
@@ -237,50 +288,8 @@ participantes = JSON.parse(localStorage.getItem("participantes"));
    console.log("premio="+premio)
    document.getElementById("premio").innerHTML= "c"+premio
 
-let divprincipal =document.getElementById("botones")
-
-for (b=1;b<11;b++){
-let div = 	document.createElement("div")
-
-for (i=0;i<10;i++){
-	
- boton = document.createElement("button");
-
- 
- 
- div.id ="divboton"+b
- boton.innerHTML= contador;
- boton.id = "n"+contador
- boton.className ="btn btn-success botones"
- boton.type="button"
- //boton.setAttribute("style","width:70px;height:40px")
-
-  
-
-div.appendChild(boton);
-divprincipal.appendChild(div)
-
-for (let indice in participantes) {
-	const dato = participantes[indice] 
-
-	console.log(dato.num)
-
-if (dato.num == contador) {
-	boton.style.backgroundColor = "blue"
-	console.log("numero="+contador)
 }
 
-}
-
-document.getElementById("n"+contador).addEventListener("click",mostrar )
-contador+=1
-
-}// for interno
-}// for externo
-
-}// cierre de funcion bt2() --------------------------------
-
-// areglo --------------------------
 
 
 // funcion mostrar--------------------------------------
@@ -314,16 +323,19 @@ const participante ={
 console.log(participante)
 
 if (localStorage.getItem("participantes")===null){
-alert("es nulo")
-participantes = [];
-participantes.push(participante);
-localStorage.setItem("participantes",JSON.stringify(participantes));
-} else {
-participantes = JSON.parse(localStorage.getItem("participantes"));
-participantes.push(participante);
-localStorage.setItem("participantes",JSON.stringify(participantes));
+   alert("es nulo")
+   participantes = [];
+   participantes.push(participante);
+   localStorage.setItem("participantes",JSON.stringify(participantes));
+   mostrar_premio()
+}  else {
+     participantes = JSON.parse(localStorage.getItem("participantes"));
+     participantes.push(participante);
+     localStorage.setItem("participantes",JSON.stringify(participantes));
 
-}// cierra else
+     mostrar_premio()
+
+   }// cierra else
 
 
 } // cierra funcion almacena
