@@ -232,7 +232,9 @@ function bt2() {
 if (localStorage.getItem("participantes")!==null){  
    mostrar_premio()
    
- }  
+ }  else {
+	 alert("no hay datos en localstorage")
+ }
 
 let divprincipal =document.getElementById("botones")
 
