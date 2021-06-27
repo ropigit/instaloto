@@ -233,6 +233,29 @@ function bt2() {
    
 let divprincipal =document.getElementById("botones")
 if (localStorage.getItem("participantes")===null){
+	
+
+for (b=1;b<11;b++){
+  let div = 	document.createElement("div")
+
+  for (i=0;i<10;i++){
+	
+   boton = document.createElement("button");
+ 
+   div.id ="divboton"+b
+   boton.innerHTML= contador;
+   boton.id = "n"+contador
+   boton.className ="btn btn-success botones"
+   boton.type="button"
+   //boton.setAttribute("style","width:70px;height:40px")
+
+   div.appendChild(boton);
+   divprincipal.appendChild(div)	
+	
+  }
+}
+	
+	
 alert("bt2 es nulo"+ contador)
 } else {
 
